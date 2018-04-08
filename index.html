@@ -1,10 +1,35 @@
 <html>
-  
+  <head>
+
+  <script src="index.js"></script>
+  <!-- 这下面两段脚本是jsui datepicker的源代码-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+</head>
+
   <body>
     <label for="">Name</label>
     <input id="name" type="text" value="Name">
     <br>
 
+    <p>Date: <input type="text" id="datepicker"></p>
+    <!-- 留出一大段给日历，需要换一个js库或者添加一个css文件-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- 将一天的时间分成96段，15分钟一段，读入小时、分钟、am or pm来计算属于哪一段15分钟-->
     <label for="">Start Time </label>
 
     <select id="timeList1">
@@ -31,7 +56,7 @@
     </select>
 
     <select id="timeList3">
-    <option value="0">am</option>
+    <option value="0" text="am">am</option>
     <option value="47">pm</option>
     </select>
     <br>
@@ -75,13 +100,14 @@
     <input id="time2" type="datetime-local" value="2017-06-01T11:30">
     <br> -->
 
+
     <button onclick="addEvent()">Add</button>
 
     <div id="events"></div>
 
     <button onclick="check()">Check</button>
 
-    <script src="index.js"></script>
+
 
 
 <!-- <p id="demo"></p>
