@@ -2,6 +2,7 @@ class User {
     constructor(name) {
         this.name = name;
         this.events = [];
+        this.dates = [];
     }
 }
 
@@ -24,7 +25,7 @@ class DateChosen{
 
 
 var users = [];
-var dates = [];
+
 
 // previous codes by Andrew:
 /*for (var i = 0; i < 3; i++) {
@@ -86,26 +87,6 @@ function addEvent() {
     var e = new Event(date, from, to);
     var userNumber = -1; // Set to -1 so it's easy to judge if the user's name already exists or not
 
-    //check if the name exists in the users list
-    for (var i = 0; i < users.length; i ++){
-        if(name.value === users[i].name){
-            userNumber = i;
-        }
-    }
-
-    if(userNumber !== -1){
-        users[userNumber].events.push(e);
-    } else{
-        // if the user not exists, add the user and then add the event
-        var user = new User(name.value);
-
-        users.push(user);
-
-        user.events.push(e);
-    }
-    updateUI();
-
-    // not only display the time period, we also need to save all these information into a global variable so we can check for free time slots in the check function
     var timeslotbusyfrom = time1 * 4 + time2 + time3;//calculate which quarter during a day
     var timeslotbusyto = time4 * 4 + time5 + time6;
 
@@ -120,12 +101,92 @@ function addEvent() {
         }
     }
 
+    //check if the name exists in the users list
+    for (var i = 0; i < users.length; i ++){
+        if(name.value === users[i].name){
+            userNumber = i;
+        }
+    }
+
+    if(userNumber !== -1){
+        users[userNumber].events.push(e);
+        users[userNumber].dates.push(new DateChosen(date, timeslot));
+    } else{
+        // if the user not exists, add the user and then add the event
+        var user = new User(name.value);
+
+        users.push(user);
+
+        user.events.push(e);
+
+        user.dates.push(new DateChosen(date, timeslot));
+    }
+    updateUI();
+
+
+    // not only display the time period, we also need to save all these information into a global variable so we can check for free time slots in the check function
+    
+    
     //need to do the same thing with username - to check if the date is already added to decide how to push the new date.
-    dates.push(new DateChosen(date, timeslot));//add a new chosen date into the global array "dates" to save
+    //add a new chosen date into the global array "dates" to save
 }
 
 function check(){
 
+    var checkArr = [];
+    for(var j=0; j<users.length;j++)
+    {
+        for(var k = 0; k < users[j].dates.length; k++){
+                for(var x = 0; x < checkArr.length; x ++)
+                {
+                    if(checkArr[x].date === users[j].dates[k].date){
+                        var temp3 = users[j].dates[k].alltimeslot;
+                        for(var i = 0; i<){
+                            checkArr[x].alltimeslot[i]
+                        }
+                        
+                    } else{
+                        var temp = [];
+                        var temp2 = users[j].dates[k].alltimeslot;
+                        for(var i = 0; i< 96; i++)
+                        {
+                            if(temp2[i] != undefined){
+                                if(temp[i] != undefined){
+                                    temp[i].push(temp2[i]);
+                                } else{
+                                    temp[i] = [];
+                                    temp[i].push(temp2[i]);
+                                }
+                            } else{
+                                //if this person is free at this time
+                            }
+                        }
+                        checkArr.push(new DateChosen(users[j].dates[k].date, temp));
+
+                    }
+                        
+                }
+
+                checkAll[].push(dates[j].date);
+                for(var k = 0; k<96; k++)
+                {
+                    if(checkArr[k] == undefined){
+                        var checkArr2 = [];
+                        checkArr2.push();
+                    }
+                }
+        } else{
+            for(var k = 0; k<96; k++)
+            {
+                if(checkArr[k] == undefined){
+                    var checkArr2 = [];
+                    checkArr2.push();
+                }
+            }
+        }
+    }
+        
+    }
 }
 
 function updateUI() {
